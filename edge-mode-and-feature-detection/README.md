@@ -2,17 +2,17 @@
 ========================================
 You are messaged by a colleague requesting your assistance. He is working on a Mobile-First web application to serve as a promotional site for Contoso Industries. He needs you to check his code looking for common mistakes. After all, you are the expert when it comes to web development!
 
-In this lab you will review the existing application and upgrade it to work with Internet Explorer's Edge Mode. Additionally, you will improve the application's feature detection mechanism.
+In this lab you will learn about HTML5 document support in Microsoft's new Edge browser, and how document declarations differ from Internet Explorer to Edge. Additionally, you will improve the application's feature detection mechanism.
 
 This lab includes the following tasks:
 
-1. [Edge Mode](#Task1)
+1. [HTML5 Document Setup](#Task1)
 1. [Feature Detection](#Task2)
 
 <a name="Task1" />
-##Edge Mode
+##HTML5 Document Setup
 
-In this exercise you will improve the application to avoid using Compatibility mode. 
+In this exercise you will learn about the deprecation of legacy Document Modes from Internet Explorer in favor of standard support for HTML5 Document Types in Microsoft Edge.
 
 The first step is to open our colleague's application.
 
@@ -22,37 +22,29 @@ The first step is to open our colleague's application.
 
 	_Open the solution_
 
-1. Make sure that Internet Explorer is selected in the Start button located on the Visual Studio toolbar.
+1. Make sure "Launch Windows App" is selected in the Start button located on the Visual Studio toolbar.
 
-	![Internet Explorer option](./images/runInIE.png)
+	![Launch Windows App option](./images/launch-edge.png)
 
-	_Internet Explorer option_
+	_The first time you launch the app, select Microsoft Edge from the list of options_
 
-1. Press **F5** to build and debug the application. Take time to familiarize yourself with the application. Once you have become acquainted with the app, stop debugging.
+1. Press **F5** to build and debug the application. Take time to familiarize yourself with the application. Once you have become acquainted with the app, close the app and stop debugging.
 
-	![App running in IE10 Mode](images/app-running-correctly-in-ie10-mode.png?raw=true)
+	![App running in Microsoft Edge](images/app-in-edge.png?raw=true)
 
-	_App running in IE10 mode_
+	_App running in Microsoft Edge_
 
-1. Go back to Visual Studio and open **Layout.cshtml** under **Views\Shared**. 
+	**Compatibility Note:** Go back to Visual Studio and open **Layout.cshtml** under **Views\Shared**.
 
-	You will notice that the `head` element contains a `meta` tag like this one:
+	You will notice the document declaration `<!DOCTYPE html>` at the top of the page. This is the standard `DOCTYPE` declaration for HTML5 apps. Microsoft Edge provides first class support for HTML5 documents; non-standard `Document Mode` meta tags like this one are no longer required or supported:
 
 	````XML
-	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="X-UA-Compatible" content="Edge" />
 	````
 
-	This tag is telling IE to render the page as if it were running under **IE10**.
+1. Again press **F5** to build and debug the application.
 
-	Starting with **IE11**, document modes are deprecated and should no longer be used, except on a temporary basis. _Edge Mode_ is the preferred document mode and represents the highest support for modern standards available to the browser.
-
-	To switch to _Edge Mode_ you will remove the Document Mode declaration. Since the application is already using the `<!DOCTYPE html>` declaration, IE will render it under _Edge Mode_. 
-
-1. Remove the line with the `meta` tag, mentioned above.
-
-1. Press **F5** to build and debug the application.
-
-	Visual Studio starts launching the app, but the application throws a JavaScript error and fails to start correctly. As you can see, the origin of this error is in **Index.cshtml** because **attachEvent** is not supported. 
+	Visual Studio starts launching the app, but the application throws a JavaScript error and fails to start correctly. As you can see, the origin of this error is in **Index.cshtml** because **attachEvent** is not supported.
 
 	![JavaScript error running in Edge Mode](images/javascript-error-running-in-edge-mode.png?raw=true)
 
@@ -63,21 +55,21 @@ The first step is to open our colleague's application.
 1. Open the **Index.cshtml** file under **Views\Home** and scroll until you find the offending code:
 
 	````JavaScript
-	<script>		 
+	<script>
 		 window.attachEvent("onload", function () {
 			setTimeout(function () { jwplayer().play(true); }, 500);
 		 });
 	</script>
 	````
 
-	The application is using **attachEvent** to subscribe to the **load** event. This mechanism for adding events was deprecated and entirely removed from IE 11. This error surfaces now that the app is no longer forcing IE to run under **IE10**. 
+	The application is using **attachEvent** to subscribe to the **load** event. This non-standard mechanism for adding events was deprecated in IE 11 and entirely removed, thus it is absent from Microsoft Edge. As you can see, the error surfaces now that the app is running in Edge.
 
-	You will update the code to call **addEventListener** in order to register an event handler.
+	You need to update the code to call **addEventListener** in order to register an event handler.
 
 1. Update the code to match the following:
 	<!-- mark:2 -->
 	````JavaScript
-	<script>		 
+	<script>
 		 window.addEventListener("load", function () {
 			setTimeout(function () { jwplayer().play(true); }, 500);
 		 });
@@ -88,9 +80,9 @@ The first step is to open our colleague's application.
 
 	Notice that the application now launches correctly.
 
-	![App running correctly in Edge Mode](images/app-running-correctly-in-edge-mode.png?raw=true)
+	![App running in Microsoft Edge](images/app-in-edge.png?raw=true)
 
-	_App running correctly in Edge Mode_
+	_App running in Microsoft Edge_
 
 1. Switch back to Visual Studio and stop debugging.
 
@@ -98,9 +90,9 @@ The first step is to open our colleague's application.
 ##Feature Detection
 
 _Feature Detection_ is the modern way of building a website that looks and behaves its best in the different browsers and browser versions. It replaces the old error-prone approach of "sniffing" the browser type and version and trying to adjust the code based on that.
-With Feature Detection you are detecting specific features using the availability of native functions and objects in the user's browser. 
+With Feature Detection you are detecting specific features using the availability of native functions and objects in the user's browser.
 
-In this exercise you will improve the Feature Detection mechanics of the application. 
+In this exercise you will improve the Feature Detection mechanics of the application.
 
 
 1. Switch back to Visual Studio.
@@ -148,7 +140,7 @@ In this exercise you will improve the Feature Detection mechanics of the applica
 
 1. Press **F5** to build and debug the application.
 
-	The application opens in Internet Explorer. Notice how at the top left the message "COMING SOON!" fades in. The behavior you observe is the same, but the code is better.
+	The application opens in Microsoft Edge. Notice how at the top left the message "COMING SOON!" fades in. The behavior you observe is the same, but the code is better.
 
 	![Coming soon fading in](images/coming-soon-fading-in.png?raw=true)
 
@@ -159,4 +151,4 @@ In this exercise you will improve the Feature Detection mechanics of the applica
 You can find out about other features that can be detected using Modernizr [here](http://modernizr.com/docs/).
 
 ###Summary
-In this lab you have learned how to use Internet Explorer's Edge Mode and how to use Feature Detection via Modernizr.
+In this lab you have learned about standard HTML5 document support in Microsoft Edge and how to use Feature Detection via Modernizr.

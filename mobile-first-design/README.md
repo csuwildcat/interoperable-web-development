@@ -31,7 +31,7 @@ The following sections will describe some of the guidelines to achieve a Respons
 
 2. Notice the **viewport meta** tag inside the **head** tag.
 	Pages optimized for a variety of devices must include a meta viewport element in the head of the document. A meta viewport tag gives the browser instructions on how to control the page's dimensions and scaling.
-	
+
 	In order to accommodate for sites not optimized for mobile screens, many modern mobile browsers set a larger browser viewport, which allows for better viewing of non-mobile-optimized sites.
 
 3. Inside the **content** property of the **meta** tag add **, initial-scale=1** to establish a 1:1 relationship between CSS pixels and device independent pixels. This is shown in the following code.
@@ -59,18 +59,13 @@ You should use relative units like **ems** and **percentages** to keep styles as
 
 	````HTML
 	<link rel="stylesheet" type="text/css" href="~/Content/enhanced.css" media="screen  and (min-width: 40.5em)" />
-	<!--[if (lt IE 9)&(!IEMobile)]>
-		<link rel="stylesheet" type="text/css" href="~/Content/enhanced.css" media="screen  and (min-width: 40.5em)" />
-	<![endif]-->
 	````
-	
-	Conditional code is used `<!--[if (lt IE 9)&(!IEMobile)]>` in order to serve up _enhanced.css_ to non-mobile versions of IE less than version 9, which do not support media queries.
-	
+
 	> **Note:** Take into account that the reference to the regular styles (styles.css) is added using CSS bundles.
 
 **Mobile First styles & Media Queries**
 
-Instead of declaring large screen rules first only to override them for smaller screens, it is better to simply define rules as more real estate becomes available. Starting with baseline shared styles and introducing more advanced layout rules when screen size permits keeps code simpler, smaller and more maintainable. 
+Instead of declaring large screen rules first only to override them for smaller screens, it is better to simply define rules as more real estate becomes available. Starting with baseline shared styles and introducing more advanced layout rules when screen size permits keeps code simpler, smaller and more maintainable.
 
 > **Note:** It is important to note that some mobile browsers do not support media queries, so serving base styles by default reaches more devices and browsers.
 
@@ -89,13 +84,13 @@ Instead of declaring large screen rules first only to override them for smaller 
 	 }
 	}
 	````
-	
+
 	The preceding styles will rearrange the application menu, so it will be rendered on the left side of the page instead of the bottom. This styles will only be applied when the device screen sizes is equal or greater than 28.75em.
-	
+
 2. Run the application in a full-screen browser, and notice how the navigation menu is now located in the left site of the page.
 
 	![The application adapted for bigger screen sizes](images/the-application-adapted-for-bigger-screen-siz.png?raw=true)
-	
+
 	_The application adapted for bigger screen sizes_
 
 3. Resize the page to a smaller size and notice how the application adapts to each size. Note that once the browser size is smaller than 28.75 em as the media query specifies, the navigation menu will go back to the mobile state, at the bottom of the page.
@@ -128,9 +123,9 @@ You should take into account that mobile devices are designed to make phone call
 4. Run the application, selecting one of the **Windows Phone** emulators.
 5. Browse to the **Contact** page.
 6. Click the phone number link. The **Edit Number** page will be displayed, showing buttons to either make or cancel the call.
-	
+
 	![Making a call from the Web Application](images/making-a-call-from-the-web-application.png?raw=true)
-	
+
 	_Making a call from the web application_
 
 <a name="Task14" />
@@ -142,7 +137,7 @@ The guideline in this topic is to load mobile optimized images by default, and t
 
 Nowadays, to build web applications that covers the most users, it is recommended to use the **Mobile First** design, which means designing your application using mobile as the baseline, and progressively increasing functionality for bigger screen sizes and devices with more capabilities. This concept is referred to as **Progressive Enhancement**.
 
-Creating a responsive web design implies, among other things: 
+Creating a responsive web design implies, among other things:
 
 - **Setting the viewport** to accommodate for sites not optimized for mobile screens.
 - **Media queries** allowing designs to adapt by establishing dimension breakpoints.

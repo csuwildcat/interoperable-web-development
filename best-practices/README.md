@@ -11,9 +11,9 @@ This hands-on lab includes the following exercises:
 
 <a name="Task1" />
 ## Correctly Handling Touch with hand.js
-Touch devices are becoming more and more prevalent these days, which is why it is so important to make sure that you write code that supports both desktop and mobile form factors. 
+Touch devices are becoming more and more prevalent these days, which is why it is so important to make sure that you write code that supports both desktop and mobile form factors.
 
-In this task you will use **Hand.js**, a framework for unifying touch, pen and mouse events (these are called collectivelly _pointer events_).
+In this task you will use **Hand.js**, a framework for unifying touch, pen and mouse events (these are called collectively _pointer events_).
 
 **Hand.js** is a polyfill (downloadable code which provides facilities that are not built into a web browser) that allows you to write touch code only once, even if the browser does not support pointer events.
 
@@ -35,18 +35,18 @@ In this task you will use **Hand.js**, a framework for unifying touch, pen and m
         }
     </script>
 	````
-	
+
 	The preceding code, will draw a black rectangle when the mouse cursor hovers over the canvas area.
 
-	But what if you want to use touch? **Only MouseDown/Up/Click works** with touch. This means that you can only fire the events with touch when you tap on the screen, not when you move your finger on the screen. 
+	But what if you want to use touch? **Only MouseDown/Up/Click works** with touch. This means that you can only fire the events with touch when you tap on the screen, not when you move your finger on the screen.
 	Using touch in the example, it will only draw a unique square at the exact position where you tap the canvas element. As soon as you try to move your finger in the canvas element, the browser will try to pan inside the page because it is the default behavior being defined.
 
 3. Run the application. When it opens, navigate to the Postcard page and try signing by using the mouse, and your fingers.
 			![signing-the-postcard](images/signing-the-postcard.png?raw=true)
 
 	_Signing the postcard_
-	
-	You then need to override the default behavior of the browser and tell it to redirect the touch events to the JavaScript code rather than trying to interpret it. 
+
+	You then need to override the default behavior of the browser and tell it to redirect the touch events to the JavaScript code rather than trying to interpret it.
 
 1. In **Sign.html**, locate the empty **style** tags and  paste the following CSS rule inside them. This tells the canvas not to react to the default behavior:
 
@@ -58,10 +58,10 @@ In this task you will use **Hand.js**, a framework for unifying touch, pen and m
         }
     </style>
 	````
-	
-	Now, when you move your finger inside the canvas element, it behaves like a mouse pointer. This code only tracks 1 finger because IE10/11 maps one finger to simulate a mouse.
 
-5. Run the application again. When it launches, navigate to the postcard page and try signing by using one finger and then two. 
+	Now, when you move your finger inside the canvas element, it behaves like a mouse pointer. This code only tracks 1 finger because Microsoft Edge maps one finger to simulate a mouse.
+
+5. Run the application again. When it launches, navigate to the postcard page and try signing by using one finger and then two.
 
 	You will notice that multiple fingers are not supported. To support multiple touch points, you can use _Pointer events_, which are intended to abstract any input to a single set of events. You will do so in the next step.
 
@@ -81,9 +81,9 @@ In this task you will use **Hand.js**, a framework for unifying touch, pen and m
         }
     </script>
 	````
-	
+
 	![Unifiying Pen, Touch and Mouse](images/unifiying-pen-touch-and-mouse.png?raw=true)
-	
+
 	_Unifying Pen, Touch & Mouse events_
 
 	Pointer events generally mimic existing mouse events but fire from any pointing input device (mouse, stylus or finger):
@@ -92,18 +92,18 @@ In this task you will use **Hand.js**, a framework for unifying touch, pen and m
 	- mouseenter => pointerenter
 	- mousemove => pointermove
 	- mouseup => pointerup
-	- ... 
-	
-	However, _Pointer events_ are currently only supported fully in IE 10+. 
+	- ...
 
-7. Run the application in Internet Explorer and notice that multiple fingers work now.
-	
+	However, _Pointer events_ are currently only fully supported in IE 10, 11, and Microsoft Edge.
+
+7. Run the application in Microsoft Edge and notice that multiple fingers work now.
+
 	![signing-the-postcard](images/signing-the-postcard.png?raw=true)
 
 	_Signing the postcard_
 
-	The web application correctly identifies touch events, but only in IE10+. If you want to support them in older versions or in other major browsers, you can use **hand.js**.
-	
+	The web application correctly identifies touch events, but only in IE 10, 11, and Edge. If you want to support them in older versions or in other major browsers, you can use **hand.js**.
+
 1. Browse to <https://handjs.codeplex.com/> and download the latest version of the library.
 
 1. Extract the script to the **Scripts** folder of your solution.
@@ -111,10 +111,10 @@ In this task you will use **Hand.js**, a framework for unifying touch, pen and m
 1. Include the extracted file in the project, by right-clicking the file and selecting **Include in Project**. **Show All Files** must be enabled to do this.
 
 	![Including hand.js](images/including-hand-js.png?raw=true)
-	
+
 	_Including hand.js_
-	
-	
+
+
 12. In the **Sign.html** file, add the following reference to the **hand.js** file inside the **head** tags. Notice that the version number may be different.
 
 	````HTML
@@ -132,7 +132,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 
 1. Switch back to Visual Studio and expand the **Home** folder under the **Views** folder.
 
-1. Open **Index.cshtml**. 
+1. Open **Index.cshtml**.
 
 	The file contains a section where styles are defined. A bit futher down you can see the HTML for the navigation bar that is displayed below the video. Notice that the `ul` element has inline styling.
 
@@ -167,7 +167,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 	bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css", "~/Content/styles.css"));
 
 	````
-	
+
 	With this you are including the new stylesheet into all pages of your application. Now you will update all pages to use the new class instead of the inline styles.
 
 1. Update **Index.cshtml**, replacing the `style` attribute of the navigation bar as shown below. Also, give the Navigation header an id.
@@ -186,13 +186,13 @@ In this task you will learn how to apply some CSS best practices. You will first
 
 1. Press **F5** to build and debug the application.
 
-	The website will launch in Internet Explorer. Navigate to the About and Contact pages. You should not notice any differences in the way the website is working.
+	The website will launch in Edge. Navigate to the About and Contact pages. You should not notice any differences in the way the website is working.
 
 	![Site unchanged after removing inline styles](images/site-unchanged-after-removing-inline-styles.png?raw=true)
 
 	_Navigation bar unchanged after removing inline styles_
 
-	By using classes you can change the style of the navigation bar throughout the website with little effort. 
+	By using classes you can change the style of the navigation bar throughout the website with little effort.
 
 	You will now update the page so that when the viewer hovers over the movie title, the title fades and the synopsis for the movie slides in. To do this you will change the html for the Index page to add the synopsis text. Then you will add styles to make the animation work. In the process you will move the styles that already exist to the Styles.css to keep them in a single location.
 
@@ -245,7 +245,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 		animation: slideOut 3s forwards;
 		display: block;
 	}
-	
+
 	@keyframes slideOut {
 		 0% {left: -100%; color: white;}
 		 100% { left: 0px; color: black;}
@@ -264,7 +264,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 	The styles added use CSS3 Animations to gradually change from one style to another. To accomplish this you need 2 rules:
 
 	* one rule in which the animation is defined:
-		
+
 		````CSS
 		@keyframes slideOut {
 			 0% {left: -100%; color: white;}
@@ -274,11 +274,11 @@ In this task you will learn how to apply some CSS best practices. You will first
 
 		This defines the _slideOut_ animation, which will gradually change the _left_ property of the element it is applied to from -100% (totally hidden) to 0px, giving the appearance of sliding right. It also gradually changes the font color from white to black. As you can see, many properties can be modified. Similarly you can add other steps or percentages in which changes occur (25%, 50%, 75%).
 
-	* a second rule to use the animation: 
+	* a second rule to use the animation:
 
 		````CSS
 		.wrapper:hover #synopsis {
-			 animation: slideOut 3s forwards; 
+			 animation: slideOut 3s forwards;
 		}
 		````
 
@@ -369,10 +369,10 @@ In this task you will learn how to apply some CSS best practices. You will first
 	</script>
 	````
 
-	
-1. Press **F5** to build and debug the application in Internet Explorer.
 
-	The home page of the website will launch in Internet Explorer. Click the title and notice how it expands and how the synopsis text slides in. Then click it again and notice that the synopsis goes away.
+1. Press **F5** to build and debug the application in Edge.
+
+	The home page of the website will launch in Edge. Click the title and notice how it expands and how the synopsis text slides in. Then click it again and notice that the synopsis goes away.
 
 	![Animation when hovering over the title IE](images/animation-when-hovering-over-the-title-ie.png?raw=true)
 
@@ -388,7 +388,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 
 1. Press **F5** to debug the application in Google Chrome.
 
-	The home page launches in Chrome. Hover over the title. Notice that the animation does not work like it did in Internet Explorer.  
+	The home page launches in Chrome. Hover over the title. Notice that the animation does not work like it did in Edge.  
 
 	![Animation not working on Chrome](images/animation-not-working-on-chrome.png?raw=true)
 
@@ -404,30 +404,30 @@ In this task you will learn how to apply some CSS best practices. You will first
 	* **-moz-**: Mozilla
 	* **-o-**: Opera
 	* **-webkit-**: Safari, Chrome, and other WebKit-based browsers
-	
+
 	You will now update the CSS to add the prefixed properties and verify this fix in Chrome.
 
 1. Open **Styles.css** and edit the rules where the `animation` tag is used to match the following code:
 
 	````CSS
 	 .fadeIn {
-		  animation: fadeIn 3s forwards;
 		  -webkit-animation: fadeIn 3s forwards;
+		  animation: fadeIn 3s forwards;
 	 }
 	````
 
 	````CSS
 	.wrapper.animation #synopsis {
-		  animation: slideOut 3s forwards; 
 		  -webkit-animation: slideOut 3s forwards;
+		  animation: slideOut 3s forwards;
 		  display: none;
 	}
 	````
 
 	````CSS
 	.wrapper.animation #movietitle {
-		  animation: fadeOut 3s forwards;
 		  -webkit-animation: fadeOut 3s forwards;
+		  animation: fadeOut 3s forwards;
 	}
 	````
 
@@ -451,7 +451,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 
 1. Press **F5** to debug the application in Google Chrome.
 
-	The home page launches in Chrome. Click the title. Notice that the animation now works like it did in Internet Explorer. Even the "COMING SOON" title flashes when the page loads.
+	The home page launches in Chrome. Click the title. Notice that the animation now works like it did in Edge. Even the "COMING SOON" title flashes when the page loads.
 
 	![Animation working in Chrome with vendor prefix](images/animation-working-in-chrome-with-vendor-prefi.png?raw=true)
 
@@ -459,36 +459,36 @@ In this task you will learn how to apply some CSS best practices. You will first
 
 1. Switch to Visual Studio and stop debugging.
 
-	As you did for Chrome, you can test your website in other browsers and add the other prefixes if needed. The [w3schools CSS Reference](http://www.w3schools.com/cssref/) page can help you determine browser support for the properties you want to use. 
-	[Here](http://www.w3schools.com/css/css3_animations.asp) is the specification for animations, that indicates this particular property is supported without the prefix in IE10+, with the -webkit- prefix for Chrome, Safari and Opera and with the -moz- prefix for Firefox. Thus, you would need to update the styles as follows to support the other browsers.
+	As you did for Chrome, you can test your website in other browsers and add the other prefixes if needed. The [w3schools CSS Reference](http://www.w3schools.com/cssref/) page can help you determine browser support for the properties you want to use.
+	[Here](http://www.w3schools.com/css/css3_animations.asp) is the specification for animations, that indicates this particular property is supported without the prefix in Edge, with the -webkit- prefix for Chrome, Safari and Opera and with the -moz- prefix for Firefox. Thus, you would need to update the styles as follows to support the other browsers.
 
 1. Edit **Styles.css** and update the existing rules to match the following code:
 
 	````CSS
     .fadeIn {
-        animation: fadeIn 3s forwards;
         -webkit-animation: fadeIn 3s forwards;
         -moz-animation: fadeIn 3s forwards;
         -o-animation: fadeIn 3s forwards;
+        animation: fadeIn 3s forwards;
     }
 	````
 
 	````CSS
 	.wrapper.animation #synopsis {
-			animation: slideOut 3s forwards; 
-			-webkit-animation: slideOut 3s forwards; 
+			-webkit-animation: slideOut 3s forwards;
 			-moz-animation: slideOut 3s forwards;
 			-o-animation: slideOut 3s forwards;
+			animation: slideOut 3s forwards;
 			display:none;
 	}
 	````
 
 	````CSS
 	.wrapper.animation #movietitle {
-			animation: fadeOut 3s forwards;
 			-webkit-animation: fadeOut 3s forwards;
 			-moz-animation: fadeOut 3s forwards;
 			-o-animation: fadeOut 3s forwards;
+			animation: fadeOut 3s forwards;
 	}
 	````
 
@@ -531,7 +531,7 @@ In this task you will learn how to apply some CSS best practices. You will first
 <a name="Task3" />
 ##Plug-in free Development
 
-From the early history of the web, browser plug-ins have played a vital role by enabling rich online multimedia experiences and complex web application functionality. However, along with these capabilities, plug-ins can come with some disadvantages. Because plug-ins are essentially applications that run inside the browser, they consume additional system resources and expose additional attack surface to security risks. Also, plug-ins are not designed for touch, and because they are separate applications from the browser itself, they don't benefit from any changes from the latest browsers that make websites work smoothly with touch. Finally, plug-ins are based on proprietary technologies and are written with variable code quality, making it difficult to predict or control their support across different browsers and operating systems. 
+From the early history of the web, browser plug-ins have played a vital role by enabling rich online multimedia experiences and complex web application functionality. However, along with these capabilities, plug-ins can come with some disadvantages. Because plug-ins are essentially applications that run inside the browser, they consume additional system resources and expose additional attack surface to security risks. Also, plug-ins are not designed for touch, and because they are separate applications from the browser itself, they don't benefit from any changes from the latest browsers that make websites work smoothly with touch. Finally, plug-ins are based on proprietary technologies and are written with variable code quality, making it difficult to predict or control their support across different browsers and operating systems.
 
 The current trend is to make the web applications plug-in free, favoring the usage of standards-based technologies specified by the [World Wide Web Consortium (W3C)](http://go.microsoft.com/fwlink/p/?LinkID=73527) like the ones comprising HTML5, which offer similar capabilities for various plug-ins. These technologies have strong support across modern web browsers, making it possible for web developers to write the same markup and script that works across all modern browsers, without writing or maintaining any additional code with third-party framework and runtime dependencies.
 
@@ -574,7 +574,7 @@ In this task, you will replace the existing flash video player with the standard
 	````
 
 	Update it so that it looks like the following code:
-	
+
 	<!-- mark:3-4 -->
 	````JavaScript
 	<script>
@@ -587,9 +587,9 @@ In this task, you will replace the existing flash video player with the standard
 
 	The updated code has the same effect as the previous one: when the page loads this handler causes the video to start playing. The difference is that it is using the new video player object.
 
-	Since you are not using the flash player anymore, you will now remove its references. 
+	Since you are not using the flash player anymore, you will now remove its references.
 
-1. Open the **_Layout.cshtml** file located in the **Views/Shared** folder. Remove the **Render** statement for the flashplayer, shown below, located inside the **head** tags. 
+1. Open the **_Layout.cshtml** file located in the **Views/Shared** folder. Remove the **Render** statement for the flashplayer, shown below, located inside the **head** tags.
 
 	````JavaScript
 	@Scripts.Render("~/bundles/flashplayer")
@@ -610,7 +610,7 @@ In this task, you will replace the existing flash video player with the standard
 
 	_HTML5 video player_
 
-For optimal future proofing and browser compatibility, it is best to develop your site entirely without using plug-ins. In some cases, however, it might not be possible for a website or web app to work completely without plug-ins. In these instances, there are some fallback techniques and mitigation strategies you can follow to ensure the best possible experience for users of plug-in free browsers, such as IE10+.
+For optimal future proofing and browser compatibility, it is best to develop your site entirely without using plug-ins. In some cases, however, it might not be possible for a website or web app to work completely without plug-ins. In these instances, there are some fallback techniques and mitigation strategies you can follow to ensure the best possible experience for users of plug-in free browsers, such as Microsoft Edge.
 
 ### Summary
 In this lab you have learned how to continue improving your web application to follow some of the web development Best Practices.
